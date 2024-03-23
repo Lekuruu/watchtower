@@ -1,9 +1,6 @@
 [submodule "api"]
 	path = api
 	url = https://github.com/lekuruu/watchtower-api
-[submodule "spectator-service"]
-	path = spectator-service
-	url = https://github.com/lekuruu/watchtower-recorder
 [submodule "recorder"]
 	path = recorder
 	url = https://github.com/lekuruu/watchtower-recorder
