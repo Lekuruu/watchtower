@@ -24,9 +24,9 @@ CREATE TABLE scores
     c300 integer NOT NULL,
     c100 integer NOT NULL,
     c50 integer NOT NULL,
-    cGeki integer NOT NULL,
-    cKatu integer NOT NULL,
-    cMiss integer NOT NULL,
+    cgeki integer NOT NULL,
+    ckatu integer NOT NULL,
+    cmiss integer NOT NULL,
     replay_filename character varying,
     replay_available boolean NOT NULL DEFAULT true
 );
