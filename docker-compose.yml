@@ -37,7 +37,7 @@ services:
       timeout: 5s
       retries: 5
 
-  recorder:
+  bancho-recorder:
     build: ./recorder
     networks:
       - watchtower
@@ -47,8 +47,30 @@ services:
       - '.env'
     environment:
       - REDIS_HOST=cache
+      - SERVER=ppy.sh
+      - USERNAME=${BANCHO_USERNAME}
+      - PASSWORD=${BANCHO_PASSWORD}
     deploy:
       replicas: 10
+    depends_on:
+      cache:
+        condition: service_healthy
+
+  akatsuki-recorder:
+    build: ./recorder
+    networks:
+      - watchtower
+    links:
+      - cache
+    env_file:
+      - '.env'
+    environment:
+      - REDIS_HOST=cache
+      - SERVER=akatsuki.gg
+      - USERNAME=${AKATSUKI_USERNAME}
+      - PASSWORD=${AKATSUKI_PASSWORD}
+    deploy:
+      replicas: 12
     depends_on:
       cache:
         condition: service_healthy
