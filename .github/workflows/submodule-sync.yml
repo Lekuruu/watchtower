@@ -23,6 +23,7 @@ jobs:
       run: |
         git update-index --cacheinfo 160000,$(git ls-remote https://github.com/lekuruu/watchtower-api.git HEAD | awk '{ print $1}'),api
         git update-index --cacheinfo 160000,$(git ls-remote https://github.com/lekuruu/watchtower-recorder.git HEAD | awk '{ print $1}'),recorder
+        git update-index --cacheinfo 160000,$(git ls-remote https://github.com/lekuruu/watchtower-processor.git HEAD | awk '{ print $1}'),processor
 
     - name: Commit update
       run: |

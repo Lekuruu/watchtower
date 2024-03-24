@@ -4,3 +4,6 @@
 [submodule "recorder"]
 	path = recorder
 	url = https://github.com/lekuruu/watchtower-recorder
+[submodule "processor"]
+	path = processor
+	url = https://github.com/lekuruu/watchtower-processor.git
