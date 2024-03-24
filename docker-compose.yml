@@ -56,25 +56,6 @@ services:
       cache:
         condition: service_healthy
 
-  akatsuki-recorder:
-    build: ./recorder
-    networks:
-      - watchtower
-    links:
-      - cache
-    env_file:
-      - '.env'
-    environment:
-      - REDIS_HOST=cache
-      - SERVER=akatsuki.gg
-      - USERNAME=${AKATSUKI_USERNAME}
-      - PASSWORD=${AKATSUKI_PASSWORD}
-    deploy:
-      replicas: 12
-    depends_on:
-      cache:
-        condition: service_healthy
-
   api:
     build: ./api
     ports:
