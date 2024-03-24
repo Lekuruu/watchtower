@@ -37,7 +37,59 @@ services:
       timeout: 5s
       retries: 5
 
-  # TODO: Add services
+  recorder:
+    build: ./recorder
+    networks:
+      - watchtower
+    links:
+      - cache
+    env_file:
+      - '.env'
+    environment:
+      - REDIS_HOST=cache
+    deploy:
+      replicas: 10
+    depends_on:
+      cache:
+        condition: service_healthy
+
+  api:
+    build: ./api
+    ports:
+      - '${API_PORT}:80'
+    networks:
+      - watchtower
+    links:
+      - db
+      - cache
+    env_file:
+      - '.env'
+    environment:
+      - POSTGRES_HOST=db
+      - REDIS_HOST=cache
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+
+  processor:
+    build: ./processor
+    networks:
+      - watchtower
+    links:
+      - db
+      - cache
+    env_file:
+      - '.env'
+    environment:
+      - POSTGRES_HOST=db
+      - REDIS_HOST=cache
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
 
 networks:
   watchtower:
